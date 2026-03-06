@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salon · Ours</title>
+    <meta name="description" content="Ours Salon. A seasonal series of gatherings in München. Small rooms, interesting people, real conversation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --linen: #EDE8DF; --linen-dark: #E3DDD2;
+            --charcoal: #2A2824; --charcoal-mid: #4A4740; --charcoal-light: #7A756B;
+            --bronze: #9A7B5B; --bronze-light: #B89B78; --bronze-dark: #7D6347;
+            --green: #2D3F2E; --green-light: #3D5440;
+            --border: #CFC8BB; --border-light: #DBD5CA;
+            --serif: 'Crimson Pro', Georgia, serif;
+            --sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--sans); background: var(--green); color: var(--linen); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        body::after { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 9999; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 200px; }
+
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(45,63,46,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: border-color 0.4s; }
+        nav.scrolled { border-bottom-color: rgba(237,232,223,0.1); }
+        .nav-mark { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; letter-spacing: 0.04em; color: var(--linen); text-decoration: none; }
+        .nav-links { display: flex; gap: 2.25rem; }
+        .nav-links a { font-family: var(--sans); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: #918D85; text-decoration: none; transition: color 0.25s; }
+        .nav-links a:hover { color: var(--linen); }
+        .nav-links a.active { color: var(--linen); }
+
+        .sh { font-family: var(--sans); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bronze-light); }
+        @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1); }
+        .reveal.vis { opacity: 1; transform: translateY(0); }
+
+        /* PAGE HEADER */
+        .page-header { padding: 10rem 3rem 5rem; }
+        .page-header-inner { display: grid; grid-template-columns: 180px 1fr; gap: 4rem; }
+        .page-header h1 { font-family: var(--serif); font-size: 3.2rem; font-weight: 400; font-style: italic; line-height: 1.1; margin-bottom: 1.5rem; color: var(--linen); opacity: 0; animation: rise 1.4s cubic-bezier(0.22,1,0.36,1) 0.15s forwards; }
+        .page-header p { font-family: var(--sans); font-size: 0.95rem; font-weight: 300; line-height: 1.8; color: #A8A393; max-width: 520px; opacity: 0; animation: rise 1.2s cubic-bezier(0.22,1,0.36,1) 0.35s forwards; }
+        .page-header p + p { margin-top: 1rem; }
+        .page-header .sh { opacity: 0; animation: rise 1s cubic-bezier(0.22,1,0.36,1) 0.05s forwards; }
+
+        /* EVENTS */
+        .events { padding: 0 3rem 6rem; }
+        .season-event { display: grid; grid-template-columns: 180px 240px 1fr; gap: 4rem; padding: 2.25rem 0; border-top: 1px solid rgba(237,232,223,0.1); align-items: start; transition: border-color 0.3s; }
+        .season-event:last-child { border-bottom: 1px solid rgba(237,232,223,0.1); }
+        .season-event:hover { border-top-color: rgba(237,232,223,0.22); }
+        .se-num { font-family: var(--serif); font-size: 0.9rem; font-weight: 400; font-style: italic; color: var(--bronze-light); }
+        .se-title { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; font-style: italic; color: var(--linen); line-height: 1.3; }
+        .se-subtitle { font-family: var(--sans); font-size: 0.72rem; font-weight: 300; letter-spacing: 0.06em; color: var(--bronze-light); margin-top: 0.4rem; }
+        .se-desc { font-family: var(--sans); font-size: 0.84rem; font-weight: 300; line-height: 1.75; color: #918C82; }
+
+        /* CONTACT on dark bg */
+        .contact { padding: 6rem 3rem 7rem; border-top: 1px solid rgba(237,232,223,0.1); }
+        .contact-grid { display: grid; grid-template-columns: 180px 1fr; gap: 4rem; }
+        .contact-content h2 { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; font-style: italic; line-height: 1.2; margin-bottom: 1.25rem; color: var(--linen); }
+        .contact-content p { font-family: var(--sans); font-size: 0.92rem; font-weight: 300; line-height: 1.8; color: #A8A393; max-width: 440px; margin-bottom: 2rem; }
+        .contact-email { font-family: var(--sans); font-size: 0.95rem; font-weight: 400; color: var(--linen); text-decoration: none; border-bottom: 1px solid var(--bronze-light); padding-bottom: 0.15rem; transition: color 0.25s, border-color 0.25s; }
+        .contact-email:hover { color: var(--bronze-light); }
+
+        footer { padding: 2rem 3rem; border-top: 1px solid rgba(237,232,223,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .footer-mark { font-family: var(--serif); font-size: 0.9rem; font-weight: 500; font-style: italic; color: var(--linen); }
+        .footer-right { display: flex; gap: 2rem; align-items: center; }
+        .footer-right a, .footer-right span { font-family: var(--sans); font-size: 0.68rem; font-weight: 300; color: #918D85; text-decoration: none; transition: color 0.2s; }
+        .footer-right a:hover { color: var(--linen); }
+
+        @media (max-width: 900px) {
+            nav { padding: 1.2rem 1.5rem; } .nav-links { gap: 1.5rem; } .nav-links a { font-size: 0.65rem; }
+            .page-header { padding: 8rem 1.5rem 3.5rem; } .page-header-inner { grid-template-columns: 1fr; gap: 1.25rem; } .page-header h1 { font-size: 2.6rem; }
+            .events { padding: 0 1.5rem 4rem; }
+            .season-event { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.75rem 0; }
+            .se-desc { margin-top: 0.5rem; }
+            .contact { padding: 4rem 1.5rem 5rem; } .contact-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+            footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+<nav id="nav">
+    <a href="index.html" class="nav-mark">Ours</a>
+    <div class="nav-links">
+        <a href="cycling-club.html">Cycling Club</a>
+        <a href="salon.html" class="active">Salon</a>
+        <a href="index.html#about">About</a>
+    </div>
+</nav>
+
+<section class="page-header">
+    <div class="page-header-inner">
+        <span class="sh">Salon</span>
+        <div>
+            <h1>Season One</h1>
+            <p>Beyond the bike, Ours runs a seasonal series of gatherings. Evenings in different spaces around München, each exploring a different theme. Part salon, part dinner party, part something that doesn't have a name yet.</p>
+            <p>Small rooms. Interesting people. Real conversation.</p>
+        </div>
+    </div>
+</section>
+
+<section class="events">
+    <div class="season-event reveal">
+        <span class="se-num">01</span>
+        <div>
+            <div class="se-title">The Room</div>
+            <div class="se-subtitle">An introduction</div>
+        </div>
+        <div class="se-desc">An evening of music and conversation. An introduction to Ours, some records, and seeing who turns up. The first gathering. No agenda beyond being present.</div>
+    </div>
+    <div class="season-event reveal">
+        <span class="se-num">02</span>
+        <div>
+            <div class="se-title">Borrowed Confidence</div>
+            <div class="se-subtitle">On authenticity when AI makes everyone sound smarter</div>
+        </div>
+        <div class="se-desc">When you use AI to write something better than you'd write naturally, who is actually communicating? A provocation and small-group conversation about what's real.</div>
+    </div>
+    <div class="season-event reveal">
+        <span class="se-num">03</span>
+        <div>
+            <div class="se-title">Slow</div>
+            <div class="se-subtitle">On pace, attention, and what we lose when everything is optimised</div>
+        </div>
+        <div class="se-desc">A hands-on evening in a workshop space. Make something with your hands. Talk about what it means to do things at the speed they actually deserve.</div>
+    </div>
+    <div class="season-event reveal">
+        <span class="se-num">04</span>
+        <div>
+            <div class="se-title">Strangers</div>
+            <div class="se-subtitle">On building real connection in a transient city</div>
+        </div>
+        <div class="se-desc">A long table, a good meal, and people you don't know yet. Structured conversation over dinner. Not networking, just honest exchange between interesting people.</div>
+    </div>
+    <div class="season-event reveal">
+        <span class="se-num">05</span>
+        <div>
+            <div class="se-title">Home</div>
+            <div class="se-subtitle">On belonging somewhere you weren't born</div>
+        </div>
+        <div class="se-desc">Short personal stories from people in the community about home, identity, and what it means to build a life in a place that isn't where you started.</div>
+    </div>
+    <div class="season-event reveal">
+        <span class="se-num">06</span>
+        <div>
+            <div class="se-title">Outside</div>
+            <div class="se-subtitle">Season finale</div>
+        </div>
+        <div class="se-desc">Back on bikes. A long day ride with the people you've spent a winter getting to know in rooms. The ride is the punctuation mark.</div>
+    </div>
+</section>
+
+<section class="contact">
+    <div class="contact-grid">
+        <span class="sh reveal">Get in touch</span>
+        <div class="contact-content">
+            <h2 class="reveal">Attend an event</h2>
+            <p class="reveal">Season One is in the works. Get in touch to be notified when events are announced. Places are limited and shared with the community first.</p>
+            <a href="mailto:hello@ours.cc" class="contact-email reveal">hello@ours.cc</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <span class="footer-mark">Ours</span>
+    <div class="footer-right">
+        <a href="https://instagram.com/ours.cc" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://strava.com/clubs/ourscc" target="_blank" rel="noopener">Strava</a>
+        <span>München, 2026</span>
+    </div>
+</footer>
+<script>
+    const nav=document.getElementById('nav');let t=false;
+    window.addEventListener('scroll',()=>{if(!t){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>40);t=false;});t=true;}});
+    const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

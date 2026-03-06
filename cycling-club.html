@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cycling Club · Ours</title>
+    <meta name="description" content="Ours Cycling Club. Group rides, day adventures, and curated cycling experiences in München.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --linen: #EDE8DF; --linen-dark: #E3DDD2;
+            --charcoal: #2A2824; --charcoal-mid: #4A4740; --charcoal-light: #7A756B;
+            --bronze: #9A7B5B; --bronze-light: #B89B78; --bronze-dark: #7D6347;
+            --green: #2D3F2E; --green-light: #3D5440;
+            --border: #CFC8BB; --border-light: #DBD5CA;
+            --serif: 'Crimson Pro', Georgia, serif;
+            --sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--sans); background: var(--linen); color: var(--charcoal); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        body::after { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 9999; opacity: 0.035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 180px; }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(237,232,223,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: border-color 0.4s; }
+        nav.scrolled { border-bottom-color: var(--border); }
+        .nav-mark { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; letter-spacing: 0.04em; color: var(--charcoal); text-decoration: none; }
+        .nav-links { display: flex; gap: 2.25rem; }
+        .nav-links a { font-family: var(--sans); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal-light); text-decoration: none; transition: color 0.25s; }
+        .nav-links a:hover { color: var(--charcoal); }
+        .nav-links a.active { color: var(--charcoal); }
+        .sh { font-family: var(--sans); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bronze); }
+        @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1); }
+        .reveal.vis { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: 0.08s; }
+        .reveal-d2 { transition-delay: 0.16s; }
+        .reveal-d3 { transition-delay: 0.24s; }
+
+        /* PAGE HEADER */
+        .page-header { padding: 10rem 3rem 5rem; }
+        .page-header-inner { display: grid; grid-template-columns: 180px 1fr; gap: 4rem; }
+        .page-header h1 { font-family: var(--serif); font-size: 3.2rem; font-weight: 400; font-style: italic; line-height: 1.1; margin-bottom: 1.5rem; opacity: 0; animation: rise 1.4s cubic-bezier(0.22,1,0.36,1) 0.15s forwards; }
+        .page-header p { font-family: var(--sans); font-size: 0.95rem; font-weight: 300; line-height: 1.8; color: var(--charcoal-mid); max-width: 520px; opacity: 0; animation: rise 1.2s cubic-bezier(0.22,1,0.36,1) 0.35s forwards; }
+        .page-header p + p { margin-top: 1rem; }
+        .page-header .sh { opacity: 0; animation: rise 1s cubic-bezier(0.22,1,0.36,1) 0.05s forwards; }
+
+        /* RIDES */
+        .rides { padding: 0 3rem 6rem; }
+        .rides-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .ride-card { background: var(--linen); padding: 2.5rem; display: flex; flex-direction: column; min-height: 340px; transition: background 0.35s; }
+        .ride-card:hover { background: var(--linen-dark); }
+        .ride-card .sh { margin-bottom: auto; }
+        .ride-card h3 { font-family: var(--serif); font-size: 1.65rem; font-weight: 400; font-style: italic; line-height: 1.25; margin-bottom: 1rem; }
+        .ride-card p { font-family: var(--sans); font-size: 0.84rem; font-weight: 300; line-height: 1.75; color: var(--charcoal-mid); }
+        .ride-card-meta { margin-top: auto; padding-top: 1.25rem; font-family: var(--sans); font-size: 0.72rem; font-weight: 300; color: var(--charcoal-light); border-top: 1px solid var(--border-light); }
+
+        /* GUIDELINES */
+        .guidelines { padding: 0 3rem 7rem; }
+        .guidelines-head { display: grid; grid-template-columns: 180px 1fr; gap: 4rem; margin-bottom: 3rem; padding-top: 4rem; border-top: 1px solid var(--border); }
+        .guidelines-head h2 { font-family: var(--serif); font-size: 2rem; font-weight: 400; font-style: italic; line-height: 1.2; margin-bottom: 1rem; }
+        .guidelines-head p { font-family: var(--sans); font-size: 0.92rem; font-weight: 300; line-height: 1.8; color: var(--charcoal-mid); max-width: 520px; }
+        .guidelines-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .guideline-item { background: var(--linen); padding: 2rem; }
+        .guideline-item h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; margin-bottom: 0.75rem; }
+        .guideline-item p { font-family: var(--sans); font-size: 0.84rem; font-weight: 300; line-height: 1.75; color: var(--charcoal-mid); }
+
+        /* CONTACT */
+        .contact { padding: 6rem 3rem 7rem; border-top: 1px solid var(--border); }
+        .contact-grid { display: grid; grid-template-columns: 180px 1fr; gap: 4rem; }
+        .contact-content h2 { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; font-style: italic; line-height: 1.2; margin-bottom: 1.25rem; }
+        .contact-content p { font-family: var(--sans); font-size: 0.92rem; font-weight: 300; line-height: 1.8; color: var(--charcoal-mid); max-width: 440px; margin-bottom: 2rem; }
+        .contact-email { font-family: var(--sans); font-size: 0.95rem; font-weight: 400; color: var(--charcoal); text-decoration: none; border-bottom: 1px solid var(--bronze); padding-bottom: 0.15rem; transition: color 0.25s; }
+        .contact-email:hover { color: var(--bronze-dark); }
+
+        footer { padding: 2rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .footer-mark { font-family: var(--serif); font-size: 0.9rem; font-weight: 500; font-style: italic; }
+        .footer-right { display: flex; gap: 2rem; align-items: center; }
+        .footer-right a, .footer-right span { font-family: var(--sans); font-size: 0.68rem; font-weight: 300; color: var(--charcoal-light); text-decoration: none; transition: color 0.2s; }
+        .footer-right a:hover { color: var(--charcoal); }
+
+        @media (max-width: 900px) {
+            nav { padding: 1.2rem 1.5rem; } .nav-links { gap: 1.5rem; } .nav-links a { font-size: 0.65rem; }
+            .page-header { padding: 8rem 1.5rem 3.5rem; } .page-header-inner { grid-template-columns: 1fr; gap: 1.25rem; } .page-header h1 { font-size: 2.6rem; }
+            .rides { padding: 0 1.5rem 4rem; } .rides-grid { grid-template-columns: 1fr; } .ride-card { min-height: auto; padding: 2rem 1.5rem; }
+            .guidelines { padding: 0 1.5rem 5rem; } .guidelines-head { grid-template-columns: 1fr; gap: 1.25rem; padding-top: 3rem; } .guidelines-grid { grid-template-columns: 1fr; }
+            .contact { padding: 4rem 1.5rem 5rem; } .contact-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+            footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+<nav id="nav">
+    <a href="index.html" class="nav-mark">Ours</a>
+    <div class="nav-links">
+        <a href="cycling-club.html" class="active">Cycling Club</a>
+        <a href="salon.html">Salon</a>
+        <a href="index.html#about">About</a>
+    </div>
+</nav>
+
+<section class="page-header">
+    <div class="page-header-inner">
+        <span class="sh">Cycling Club</span>
+        <div>
+            <h1>Ours CC</h1>
+            <p>Group rides built around good routes, good stops, and good company. Clear road rules, support for newer group riders, and a ride-together ethos with space to push when you want to.</p>
+            <p>No cameras in your face. No content shoots. Just riding.</p>
+        </div>
+    </div>
+</section>
+
+<section class="rides">
+    <div class="rides-grid">
+        <div class="ride-card reveal">
+            <span class="sh">Weekly</span>
+            <h3>Community Rides</h3>
+            <p>Saturday mornings from a fixed point in the city. Ride-together and send-it sections. Always a café stop. No sign-up, no fee. Just show up.</p>
+            <div class="ride-card-meta">Saturdays · 50–80 km · Mixed pace · Year-round</div>
+        </div>
+        <div class="ride-card reveal reveal-d1">
+            <span class="sh">Monthly</span>
+            <h3>Day Adventures</h3>
+            <p>Curated rides into the landscape south of München. Every route built around a destination: a farmhouse lunch, a village bakery, the right Biergarten at the right time of day.</p>
+            <div class="ride-card-meta">80–130 km · Routes recce'd · Limited places</div>
+        </div>
+        <div class="ride-card reveal reveal-d2">
+            <span class="sh">Coming soon</span>
+            <h3>Corporate &amp; Teams</h3>
+            <p>Curated cycling experiences for teams who want something more memorable than another offsite. Built around your group, your pace, and a route worth remembering.</p>
+            <div class="ride-card-meta">Tailored · Half or full day · Get in touch</div>
+        </div>
+    </div>
+</section>
+
+<section class="guidelines">
+    <div class="guidelines-head">
+        <span class="sh reveal">On the bike</span>
+        <div>
+            <h2 class="reveal">Ride guidelines</h2>
+            <p class="reveal">Group riding has its own etiquette. These are the basics for Ours CC rides, whether it's your first group ride or your thousandth.</p>
+        </div>
+    </div>
+    <div class="guidelines-grid">
+        <div class="guideline-item reveal">
+            <h3>Together first</h3>
+            <p>Every ride has a ride-together pace. If you want to send it, there's space for that. But the group stays connected. Regroup at the top, regroup after turns, nobody gets left behind unless they choose to push ahead.</p>
+        </div>
+        <div class="guideline-item reveal reveal-d1">
+            <h3>Well led</h3>
+            <p>Clear road calls, predictable group behaviour, routes recce'd before you ride them. New to group riding? You'll learn how it works fast. Experienced? You'll appreciate that everyone else knows too.</p>
+        </div>
+        <div class="guideline-item reveal reveal-d2">
+            <h3>Road rules</h3>
+            <p>Ride two abreast maximum. Single out when traffic needs space. Point out hazards for the rider behind you. No half-wheeling. If you don't know what any of that means, that's fine. You will after one Saturday.</p>
+        </div>
+        <div class="guideline-item reveal reveal-d3">
+            <h3>Bring what you need</h3>
+            <p>A spare tube, a pump or CO2, and enough food and water for the distance. If you're not sure what to bring, ask in the group chat before the ride. Nobody minds the question.</p>
+        </div>
+    </div>
+</section>
+
+<section class="contact">
+    <div class="contact-grid">
+        <span class="sh reveal">Get in touch</span>
+        <div class="contact-content">
+            <h2 class="reveal">Join a ride</h2>
+            <p class="reveal">Drop a line to get added to the ride chat, or just turn up on Saturday morning. Details shared weekly.</p>
+            <a href="mailto:hello@ours.cc" class="contact-email reveal">hello@ours.cc</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <span class="footer-mark">Ours</span>
+    <div class="footer-right">
+        <a href="https://instagram.com/ours.cc" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://strava.com/clubs/ourscc" target="_blank" rel="noopener">Strava</a>
+        <span>München, 2026</span>
+    </div>
+</footer>
+<script>
+    const nav=document.getElementById('nav');let t=false;
+    window.addEventListener('scroll',()=>{if(!t){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>40);t=false;});t=true;}});
+    const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

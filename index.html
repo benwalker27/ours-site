@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ours · München</title>
+    <meta name="description" content="Ours. Shared experience, cycling, and community in München.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --linen: #EDE8DF; --linen-dark: #E3DDD2;
+            --charcoal: #2A2824; --charcoal-mid: #4A4740; --charcoal-light: #7A756B;
+            --bronze: #9A7B5B; --bronze-light: #B89B78; --bronze-dark: #7D6347;
+            --green: #2D3F2E; --green-light: #3D5440;
+            --border: #CFC8BB; --border-light: #DBD5CA;
+            --serif: 'Crimson Pro', Georgia, serif;
+            --sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--sans); background: var(--linen); color: var(--charcoal); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        body::after { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 9999; opacity: 0.035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 180px; }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(237,232,223,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: border-color 0.4s; }
+        nav.scrolled { border-bottom-color: var(--border); }
+        .nav-mark { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; letter-spacing: 0.04em; color: var(--charcoal); text-decoration: none; }
+        .nav-links { display: flex; gap: 2.25rem; }
+        .nav-links a { font-family: var(--sans); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal-light); text-decoration: none; transition: color 0.25s; }
+        .nav-links a:hover { color: var(--charcoal); }
+        .sh { font-family: var(--sans); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bronze); }
+        @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1); }
+        .reveal.vis { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: 0.08s; }
+
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
+        .hero-name { font-family: var(--serif); font-size: clamp(5.5rem,15vw,13rem); font-weight: 400; font-style: italic; letter-spacing: -0.02em; line-height: 0.95; opacity: 0; animation: rise 1.6s cubic-bezier(0.22,1,0.36,1) 0.15s forwards; }
+        .hero-place { margin-top: 1.75rem; font-family: var(--sans); font-size: 0.72rem; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bronze); opacity: 0; animation: rise 1.4s cubic-bezier(0.22,1,0.36,1) 0.5s forwards; }
+        .hero-line { position: absolute; bottom: 3.5rem; left: 50%; transform: translateX(-50%); width: 1px; height: 56px; background: linear-gradient(to bottom, transparent, var(--bronze)); opacity: 0; animation: rise 1s ease 1s forwards; }
+
+        .manifesto { padding: 10rem 3rem 8rem; display: grid; grid-template-columns: 1fr min(600px,100%) 1fr; }
+        .manifesto-inner { grid-column: 2; }
+        .manifesto p { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; line-height: 1.7; }
+        .manifesto p + p { margin-top: 1.75rem; }
+        .manifesto em { font-style: italic; color: var(--bronze-dark); }
+        .manifesto .manifesto-aside { font-family: var(--sans); font-size: 0.85rem; font-weight: 300; line-height: 1.65; color: var(--charcoal-light); margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+
+        .branches { padding: 0 3rem 6rem; }
+        .branches-label { padding-bottom: 3rem; }
+        .branches-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .branch-card { background: var(--linen); padding: 3rem; display: flex; flex-direction: column; min-height: 280px; text-decoration: none; color: inherit; transition: background 0.35s; }
+        .branch-card:hover { background: var(--linen-dark); }
+        .branch-card .sh { margin-bottom: auto; }
+        .branch-card h2 { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; font-style: italic; line-height: 1.2; margin-bottom: 1rem; }
+        .branch-card p { font-family: var(--sans); font-size: 0.88rem; font-weight: 300; line-height: 1.75; color: var(--charcoal-mid); max-width: 420px; }
+        .branch-arrow { margin-top: 2rem; font-family: var(--sans); font-size: 0.72rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bronze); transition: color 0.25s; }
+        .branch-card:hover .branch-arrow { color: var(--bronze-dark); }
+
+        .ethos { padding: 6rem 3rem 7rem; border-top: 1px solid var(--border); }
+        .ethos-head { display: grid; grid-template-columns: 180px 1fr; gap: 4rem; margin-bottom: 4rem; }
+        .ethos-head h2 { font-family: var(--serif); font-size: 2.8rem; font-weight: 400; font-style: italic; line-height: 1.15; }
+        .ethos-grid { display: grid; grid-template-columns: 180px repeat(2,1fr); gap: 4rem; }
+        .ethos-item h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 500; margin-bottom: 0.75rem; }
+        .ethos-item p { font-family: var(--sans); font-size: 0.88rem; font-weight: 300; line-height: 1.75; color: var(--charcoal-mid); }
+
+        .signup { background: var(--green); color: var(--linen); padding: 7rem 3rem; position: relative; }
+        .signup::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; opacity: 0.06; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 200px; }
+        .signup-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 180px 1fr; gap: 4rem; }
+        .signup .sh { color: var(--bronze-light); }
+        .signup-content h2 { font-family: var(--serif); font-size: 2.6rem; font-weight: 400; font-style: italic; line-height: 1.2; margin-bottom: 1.25rem; }
+        .signup-content > p { font-family: var(--sans); font-size: 0.92rem; font-weight: 300; line-height: 1.8; color: #A8A393; max-width: 480px; margin-bottom: 2.5rem; }
+        .signup-form { display: flex; max-width: 480px; }
+        .signup-form input[type="email"] { flex: 1; font-family: var(--sans); font-size: 0.88rem; font-weight: 300; padding: 0.85rem 1.2rem; background: rgba(237,232,223,0.08); border: 1px solid rgba(237,232,223,0.2); border-right: none; color: var(--linen); outline: none; transition: border-color 0.3s, background 0.3s; }
+        .signup-form input[type="email"]::placeholder { color: #7A756B; }
+        .signup-form input[type="email"]:focus { background: rgba(237,232,223,0.12); border-color: rgba(237,232,223,0.35); }
+        .signup-form button { font-family: var(--sans); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.85rem 1.75rem; background: var(--bronze); color: var(--linen); border: 1px solid var(--bronze); cursor: pointer; transition: background 0.3s; }
+        .signup-form button:hover { background: var(--bronze-dark); border-color: var(--bronze-dark); }
+        .signup-note { font-family: var(--sans); font-size: 0.72rem; font-weight: 300; color: #6B6860; margin-top: 1rem; }
+        .signup-note a { color: var(--bronze-light); text-decoration: none; border-bottom: 1px solid var(--bronze-light); }
+
+        footer { padding: 2rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .footer-mark { font-family: var(--serif); font-size: 0.9rem; font-weight: 500; font-style: italic; }
+        .footer-right { display: flex; gap: 2rem; align-items: center; }
+        .footer-right a, .footer-right span { font-family: var(--sans); font-size: 0.68rem; font-weight: 300; color: var(--charcoal-light); text-decoration: none; transition: color 0.2s; }
+        .footer-right a:hover { color: var(--charcoal); }
+
+        @media (max-width: 900px) {
+            nav { padding: 1.2rem 1.5rem; } .nav-links { gap: 1.5rem; } .nav-links a { font-size: 0.65rem; }
+            .hero-name { font-size: clamp(3.8rem,18vw,7rem); }
+            .manifesto { padding: 6rem 1.5rem 5rem; } .manifesto p { font-size: 1.3rem; }
+            .branches { padding: 0 1.5rem 4rem; } .branches-grid { grid-template-columns: 1fr; } .branch-card { min-height: auto; padding: 2.5rem 1.5rem; }
+            .ethos { padding: 4rem 1.5rem 5rem; } .ethos-head { grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 2.5rem; } .ethos-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .signup { padding: 5rem 1.5rem; } .signup-inner { grid-template-columns: 1fr; gap: 1.25rem; } .signup-content h2 { font-size: 2rem; } .signup-form { flex-direction: column; } .signup-form input[type="email"] { border-right: 1px solid rgba(237,232,223,0.2); }
+            footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+<nav id="nav">
+    <a href="/" class="nav-mark">Ours</a>
+    <div class="nav-links">
+        <a href="cycling-club.html">Cycling Club</a>
+        <a href="salon.html">Salon</a>
+        <a href="#about">About</a>
+    </div>
+</nav>
+<section class="hero">
+    <h1 class="hero-name">Ours</h1>
+    <p class="hero-place">München</p>
+    <div class="hero-line"></div>
+</section>
+<section class="manifesto">
+    <div class="manifesto-inner">
+        <p class="reveal">Ours was born out of a craving for authentic, unfiltered experiences, indoors and out. The kind where you show up as yourself, meet people worth knowing, and leave feeling like the time meant something.</p>
+        <p class="reveal">Bikes came first. Saturday mornings through the Isar valley, long days into the foothills, weekends in the mountains. But Ours is bigger than cycling. It's a commitment to <em>shared experience</em>, done with intention, open to everyone, owned by no one person.</p>
+        <p class="manifesto-aside reveal">English and German spoken. Based in München. All levels welcome.</p>
+    </div>
+</section>
+<section class="branches">
+    <div class="branches-label"><span class="sh reveal">What Ours is</span></div>
+    <div class="branches-grid">
+        <a href="cycling-club.html" class="branch-card reveal">
+            <span class="sh">Cycling Club</span>
+            <h2>Ours CC</h2>
+            <p>Group rides built around good routes, good stops, and good company. Weekly community rides, monthly day adventures, and curated experiences for teams.</p>
+            <span class="branch-arrow">Learn more →</span>
+        </a>
+        <a href="salon.html" class="branch-card reveal reveal-d1">
+            <span class="sh">Salon</span>
+            <h2>Season One</h2>
+            <p>A seasonal series of gatherings in different spaces around München. Small rooms, interesting people, real conversation.</p>
+            <span class="branch-arrow">Learn more →</span>
+        </a>
+    </div>
+</section>
+<section class="ethos" id="about">
+    <div class="ethos-head">
+        <span class="sh reveal">How things work</span>
+        <h2 class="reveal">Show up as you are</h2>
+    </div>
+    <div class="ethos-grid">
+        <div></div>
+        <div class="ethos-item reveal"><h3>People over content</h3><p>Ours exists for the people in the room, not the people watching from outside. No cameras pushed in faces, no manufactured moments. If something's worth photographing, someone will photograph it. That's different from designing the experience around the photo.</p></div>
+        <div class="ethos-item reveal reveal-d1"><h3>Two languages, one group</h3><p>English and German, freely mixed. München is an international city and Ours reflects that. If you can communicate, you belong here.</p></div>
+        <div></div>
+        <div class="ethos-item reveal"><h3>Intentional, not exclusive</h3><p>Ours is open to anyone who shows up with good energy. There's no membership, no vetting. But there is an expectation: be present, be respectful, bring something to the table even if that something is just curiosity.</p></div>
+        <div class="ethos-item reveal reveal-d1"><h3>Built in the open</h3><p>Ours is a work in progress and that's the point. The format will evolve, the programming will shift, new ideas will come from the community itself. The only thing that stays fixed is the commitment to doing things with care.</p></div>
+    </div>
+</section>
+<section class="signup" id="signup">
+    <div class="signup-inner">
+        <span class="sh reveal">Stay in the loop</span>
+        <div class="signup-content">
+            <h2 class="reveal">Come find us</h2>
+            <p class="reveal">Ours is just getting started. Leave your email to hear about upcoming rides and events. No spam. Just details when there's something worth sharing.</p>
+            <div class="signup-form reveal">
+                <input type="email" placeholder="Your email" aria-label="Email address">
+                <button type="button" onclick="handleSignup()">Sign up</button>
+            </div>
+            <p class="signup-note reveal">Or reach out directly: <a href="mailto:hello@ours.cc">hello@ours.cc</a></p>
+        </div>
+    </div>
+</section>
+<footer>
+    <span class="footer-mark">Ours</span>
+    <div class="footer-right">
+        <a href="https://instagram.com/ours.cc" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://strava.com/clubs/ourscc" target="_blank" rel="noopener">Strava</a>
+        <span>München, 2026</span>
+    </div>
+</footer>
+<script>
+    const nav=document.getElementById('nav');let t=false;
+    window.addEventListener('scroll',()=>{if(!t){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>40);t=false;});t=true;}});
+    const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    function handleSignup(){const i=document.querySelector('.signup-form input'),e=i.value.trim();if(!e||!e.includes('@')){i.style.borderColor='#C4746E';return;}const b=document.querySelector('.signup-form button');b.textContent='Thank you';b.style.background='var(--green-light)';b.style.borderColor='var(--green-light)';i.value='';i.style.borderColor='rgba(237,232,223,0.2)';}
+</script>
+</body>
+</html>
