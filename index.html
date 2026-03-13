@@ -46,6 +46,10 @@
         .manifesto em { font-style: italic; color: var(--bronze-dark); }
         .manifesto .manifesto-aside { font-family: var(--sans); font-size: 0.85rem; font-weight: 300; line-height: 1.65; color: var(--charcoal-light); margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
 
+        .home-image { padding: 0 3rem 6rem; }
+        .home-image-frame { overflow: hidden; border: 1px solid var(--border); }
+        .home-image-frame img { width: 100%; display: block; object-fit: cover; max-height: 560px; }
+
         .branches { padding: 0 3rem 6rem; }
         .branches-label { padding-bottom: 3rem; }
         .branches-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
@@ -89,6 +93,7 @@
             nav { padding: 1.2rem 1.5rem; } .nav-links { gap: 1.5rem; } .nav-links a { font-size: 0.65rem; }
             .hero-name { font-size: clamp(3.8rem,18vw,7rem); }
             .manifesto { padding: 6rem 1.5rem 5rem; } .manifesto p { font-size: 1.3rem; }
+            .home-image { padding: 0 1.5rem 4rem; } .home-image-frame img { max-height: 320px; }
             .branches { padding: 0 1.5rem 4rem; } .branches-grid { grid-template-columns: 1fr; } .branch-card { min-height: auto; padding: 2.5rem 1.5rem; }
             .ethos { padding: 4rem 1.5rem 5rem; } .ethos-head { grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 2.5rem; } .ethos-grid { grid-template-columns: 1fr; gap: 2.5rem; }
             .signup { padding: 5rem 1.5rem; } .signup-inner { grid-template-columns: 1fr; gap: 1.25rem; } .signup-content h2 { font-size: 2rem; } .signup-form { flex-direction: column; } .signup-form input[type="email"] { border-right: 1px solid rgba(237,232,223,0.2); }
@@ -118,6 +123,11 @@
         <p class="manifesto-aside reveal">English and German spoken. Based in München. All levels welcome.</p>
     </div>
 </section>
+<div class="home-image reveal">
+    <div class="home-image-frame">
+        <img src="https://picsum.photos/seed/ourshome/1400/560" alt="Riding through the Isar valley south of München" loading="lazy">
+    </div>
+</div>
 <section class="branches">
     <div class="branches-label"><span class="sh reveal">What Ours is</span></div>
     <div class="branches-grid">
