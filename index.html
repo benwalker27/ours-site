@@ -34,10 +34,11 @@
         .reveal.vis { opacity: 1; transform: translateY(0); }
         .reveal-d1 { transition-delay: 0.08s; }
 
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
-        .hero-name { font-family: var(--serif); font-size: clamp(5.5rem,15vw,13rem); font-weight: 400; font-style: italic; letter-spacing: -0.02em; line-height: 0.95; opacity: 0; animation: rise 1.6s cubic-bezier(0.22,1,0.36,1) 0.15s forwards; }
-        .hero-place { margin-top: 1.75rem; font-family: var(--sans); font-size: 0.72rem; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bronze); opacity: 0; animation: rise 1.4s cubic-bezier(0.22,1,0.36,1) 0.5s forwards; }
-        .hero-line { position: absolute; bottom: 3.5rem; left: 50%; transform: translateX(-50%); width: 1px; height: 56px; background: linear-gradient(to bottom, transparent, var(--bronze)); opacity: 0; animation: rise 1s ease 1s forwards; }
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; background-image: url('https://picsum.photos/seed/oursforest/1920/1080'); background-size: cover; background-position: center; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: rgba(42,40,36,0.45); }
+        .hero-name { position: relative; z-index: 1; font-family: var(--serif); font-size: clamp(5.5rem,15vw,13rem); font-weight: 400; font-style: italic; letter-spacing: -0.02em; line-height: 0.95; color: var(--linen); opacity: 0; animation: rise 1.6s cubic-bezier(0.22,1,0.36,1) 0.15s forwards; }
+        .hero-place { position: relative; z-index: 1; margin-top: 1.75rem; font-family: var(--sans); font-size: 0.72rem; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bronze-light); opacity: 0; animation: rise 1.4s cubic-bezier(0.22,1,0.36,1) 0.5s forwards; }
+        .hero-line { position: absolute; bottom: 3.5rem; left: 50%; transform: translateX(-50%); width: 1px; height: 56px; background: linear-gradient(to bottom, transparent, var(--bronze-light)); opacity: 0; animation: rise 1s ease 1s forwards; z-index: 1; }
 
         .manifesto { padding: 10rem 3rem 8rem; display: grid; grid-template-columns: 1fr min(600px,100%) 1fr; }
         .manifesto-inner { grid-column: 2; }
@@ -45,10 +46,6 @@
         .manifesto p + p { margin-top: 1.75rem; }
         .manifesto em { font-style: italic; color: var(--bronze-dark); }
         .manifesto .manifesto-aside { font-family: var(--sans); font-size: 0.85rem; font-weight: 300; line-height: 1.65; color: var(--charcoal-light); margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-
-        .home-image { padding: 0 3rem 6rem; }
-        .home-image-frame { overflow: hidden; border: 1px solid var(--border); }
-        .home-image-frame img { width: 100%; display: block; object-fit: cover; max-height: 560px; }
 
         .branches { padding: 0 3rem 6rem; }
         .branches-label { padding-bottom: 3rem; }
@@ -93,7 +90,6 @@
             nav { padding: 1.2rem 1.5rem; } .nav-links { gap: 1.5rem; } .nav-links a { font-size: 0.65rem; }
             .hero-name { font-size: clamp(3.8rem,18vw,7rem); }
             .manifesto { padding: 6rem 1.5rem 5rem; } .manifesto p { font-size: 1.3rem; }
-            .home-image { padding: 0 1.5rem 4rem; } .home-image-frame img { max-height: 320px; }
             .branches { padding: 0 1.5rem 4rem; } .branches-grid { grid-template-columns: 1fr; } .branch-card { min-height: auto; padding: 2.5rem 1.5rem; }
             .ethos { padding: 4rem 1.5rem 5rem; } .ethos-head { grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 2.5rem; } .ethos-grid { grid-template-columns: 1fr; gap: 2.5rem; }
             .signup { padding: 5rem 1.5rem; } .signup-inner { grid-template-columns: 1fr; gap: 1.25rem; } .signup-content h2 { font-size: 2rem; } .signup-form { flex-direction: column; } .signup-form input[type="email"] { border-right: 1px solid rgba(237,232,223,0.2); }
@@ -123,11 +119,6 @@
         <p class="manifesto-aside reveal">English and German spoken. Based in München. All levels welcome.</p>
     </div>
 </section>
-<div class="home-image reveal">
-    <div class="home-image-frame">
-        <img src="https://picsum.photos/seed/ourshome/1400/560" alt="Riding through the Isar valley south of München" loading="lazy">
-    </div>
-</div>
 <section class="branches">
     <div class="branches-label"><span class="sh reveal">What Ours is</span></div>
     <div class="branches-grid">
