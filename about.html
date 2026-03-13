@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stories · Ours</title>
-    <meta name="description" content="Ours Stories. Dispatches from the road, the room, and the in-between.">
+    <title>About · Ours</title>
+    <meta name="description" content="About Ours. A community built around shared experience, cycling, and real connection in München.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -22,7 +22,6 @@
         html { scroll-behavior: smooth; }
         body { font-family: var(--sans); background: var(--linen); color: var(--charcoal); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         body::after { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 9999; opacity: 0.035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 180px; }
-
         nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(237,232,223,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: border-color 0.4s; }
         nav.scrolled { border-bottom-color: var(--border); }
         .nav-mark { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; letter-spacing: 0.04em; color: var(--charcoal); text-decoration: none; }
@@ -30,42 +29,37 @@
         .nav-links a { font-family: var(--sans); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal-light); text-decoration: none; transition: color 0.25s; }
         .nav-links a:hover { color: var(--charcoal); }
         .nav-links a.active { color: var(--charcoal); }
-
         .sh { font-family: var(--sans); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bronze); }
         @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
         .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1); }
         .reveal.vis { opacity: 1; transform: translateY(0); }
         .reveal-d1 { transition-delay: 0.08s; }
         .reveal-d2 { transition-delay: 0.16s; }
+        .reveal-d3 { transition-delay: 0.24s; }
 
         /* PAGE HEADER */
         .page-header { padding: 10rem 3rem 5rem; }
         .page-header-inner { display: grid; grid-template-columns: 180px 1fr; gap: 4rem; }
         .page-header h1 { font-family: var(--serif); font-size: 3.2rem; font-weight: 400; font-style: italic; line-height: 1.1; margin-bottom: 1.5rem; opacity: 0; animation: rise 1.4s cubic-bezier(0.22,1,0.36,1) 0.15s forwards; }
         .page-header p { font-family: var(--sans); font-size: 0.95rem; font-weight: 300; line-height: 1.8; color: var(--charcoal-mid); max-width: 520px; opacity: 0; animation: rise 1.2s cubic-bezier(0.22,1,0.36,1) 0.35s forwards; }
+        .page-header p + p { margin-top: 1rem; }
         .page-header .sh { opacity: 0; animation: rise 1s cubic-bezier(0.22,1,0.36,1) 0.05s forwards; }
 
-        /* STORIES GRID */
-        .stories { padding: 0 3rem 6rem; }
-        .stories-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        /* STORY */
+        .story { padding: 0 3rem 6rem; }
+        .story-inner { display: grid; grid-template-columns: 180px 1fr; gap: 4rem; }
+        .story-content { max-width: 560px; }
+        .story-content p { font-family: var(--serif); font-size: 1.25rem; font-weight: 400; line-height: 1.75; }
+        .story-content p + p { margin-top: 1.5rem; }
+        .story-content em { font-style: italic; color: var(--bronze-dark); }
 
-        .story-card { background: var(--linen); display: grid; grid-template-columns: 420px 1fr; min-height: 320px; text-decoration: none; color: inherit; transition: background 0.35s; }
-        .story-card:hover { background: var(--linen-dark); }
-        .story-card:hover .story-image img { transform: scale(1.03); }
-        .story-card:hover .story-arrow { color: var(--bronze-dark); }
-
-        .story-image { overflow: hidden; position: relative; background: var(--linen-dark); }
-        .story-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.22,1,0.36,1); }
-        .story-image .placeholder { width: 100%; height: 100%; min-height: 240px; background: linear-gradient(145deg, var(--linen-dark) 0%, var(--border) 100%); display: flex; align-items: center; justify-content: center; }
-        .story-image .placeholder span { font-family: var(--serif); font-size: 3rem; font-style: italic; color: var(--border-light); opacity: 0.6; }
-
-        .story-content { padding: 2.5rem 3rem; display: flex; flex-direction: column; }
-        .story-content .sh { margin-bottom: 1.25rem; }
-        .story-content h2 { font-family: var(--serif); font-size: 1.85rem; font-weight: 400; font-style: italic; line-height: 1.25; margin-bottom: 1rem; }
-        .story-content p { font-family: var(--sans); font-size: 0.88rem; font-weight: 300; line-height: 1.75; color: var(--charcoal-mid); max-width: 480px; }
-        .story-meta { margin-top: auto; padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); }
-        .story-date { font-family: var(--sans); font-size: 0.72rem; font-weight: 300; color: var(--charcoal-light); }
-        .story-arrow { font-family: var(--sans); font-size: 0.72rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bronze); transition: color 0.25s; }
+        /* VALUES */
+        .values { padding: 4rem 3rem 6rem; border-top: 1px solid var(--border); }
+        .values-head { display: grid; grid-template-columns: 180px 1fr; gap: 4rem; margin-bottom: 3rem; }
+        .values-head h2 { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; font-style: italic; line-height: 1.2; }
+        .values-grid { display: grid; grid-template-columns: 180px repeat(2,1fr); gap: 4rem; }
+        .values-item h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; margin-bottom: 0.75rem; }
+        .values-item p { font-family: var(--sans); font-size: 0.84rem; font-weight: 300; line-height: 1.75; color: var(--charcoal-mid); }
 
         /* CONTACT */
         .contact { padding: 6rem 3rem 7rem; border-top: 1px solid var(--border); }
@@ -84,11 +78,8 @@
         @media (max-width: 900px) {
             nav { padding: 1.2rem 1.5rem; } .nav-links { gap: 1.5rem; } .nav-links a { font-size: 0.65rem; }
             .page-header { padding: 8rem 1.5rem 3.5rem; } .page-header-inner { grid-template-columns: 1fr; gap: 1.25rem; } .page-header h1 { font-size: 2.6rem; }
-            .stories { padding: 0 1.5rem 4rem; }
-            .story-card { grid-template-columns: 1fr; }
-            .story-image .placeholder { min-height: 200px; }
-            .story-content { padding: 2rem 1.5rem; }
-            .story-content h2 { font-size: 1.5rem; }
+            .story { padding: 0 1.5rem 4rem; } .story-inner { grid-template-columns: 1fr; gap: 1.25rem; }
+            .values { padding: 3rem 1.5rem 5rem; } .values-head { grid-template-columns: 1fr; gap: 1.25rem; } .values-grid { grid-template-columns: 1fr; gap: 2.5rem; }
             .contact { padding: 4rem 1.5rem 5rem; } .contact-grid { grid-template-columns: 1fr; gap: 1.25rem; }
             footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; align-items: flex-start; }
         }
@@ -100,74 +91,54 @@
     <div class="nav-links">
         <a href="cycling-club.html">Cycling Club</a>
         <a href="salon.html">Salon</a>
-        <a href="stories.html" class="active">Stories</a>
-        <a href="about.html">About</a>
+        <a href="stories.html">Stories</a>
+        <a href="about.html" class="active">About</a>
     </div>
 </nav>
 
 <section class="page-header">
     <div class="page-header-inner">
-        <span class="sh">Stories</span>
+        <span class="sh">About</span>
         <div>
-            <h1>From the road and the room</h1>
-            <p>Dispatches, reflections, and the occasional route worth saving. Writing from the community when something feels worth putting down.</p>
+            <h1>Who we are</h1>
+            <p>Ours is a München-based community built around shared experience. Cycling, conversation, and the kind of gatherings where you leave knowing someone better than when you arrived.</p>
+            <p>No brand partnerships. No content strategy. Just people doing things together, with care.</p>
         </div>
     </div>
 </section>
 
-<section class="stories">
-    <div class="stories-grid">
-        <a href="stories/first-saturday.html" class="story-card reveal">
-            <div class="story-image">
-                <div class="placeholder"><span>I</span></div>
-            </div>
-            <div class="story-content">
-                <span class="sh">Cycling Club</span>
-                <h2>The first Saturday</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Sed non velit nec arcu fermentum tincidunt vel at turpis.</p>
-                <div class="story-meta">
-                    <span class="story-date">March 2026</span>
-                    <span class="story-arrow">Read →</span>
-                </div>
-            </div>
-        </a>
-        <a href="stories/borrowed-confidence.html" class="story-card reveal reveal-d1">
-            <div class="story-image">
-                <div class="placeholder"><span>II</span></div>
-            </div>
-            <div class="story-content">
-                <span class="sh">Salon</span>
-                <h2>Notes on borrowed confidence</h2>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Donec id elit non mi porta gravida at eget metus.</p>
-                <div class="story-meta">
-                    <span class="story-date">February 2026</span>
-                    <span class="story-arrow">Read →</span>
-                </div>
-            </div>
-        </a>
-        <a href="stories/isar-south.html" class="story-card reveal reveal-d2">
-            <div class="story-image">
-                <div class="placeholder"><span>III</span></div>
-            </div>
-            <div class="story-content">
-                <span class="sh">Route</span>
-                <h2>Isar south, the long way</h2>
-                <p>Maecenas faucibus mollis interdum. Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-                <div class="story-meta">
-                    <span class="story-date">January 2026</span>
-                    <span class="story-arrow">Read →</span>
-                </div>
-            </div>
-        </a>
+<section class="story">
+    <div class="story-inner">
+        <span class="sh reveal">The backstory</span>
+        <div class="story-content">
+            <p class="reveal">Ours started with a few Saturday morning rides along the Isar. No club, no structure, just a group chat and a meeting point. The routes got longer, the coffee stops got better, and the group grew through word of mouth.</p>
+            <p class="reveal">What kept people coming back wasn't the cycling. It was the <em>feeling</em> of being part of something unforced. A room where nobody was performing. So we started asking: what else could work like that?</p>
+            <p class="reveal">That question became the Salon — a seasonal series of small gatherings built around a single theme. Different spaces, interesting people, real talk. And it became Stories — a place to write honestly about what it means to live in this city, move through it, and belong to it.</p>
+        </div>
+    </div>
+</section>
+
+<section class="values">
+    <div class="values-head">
+        <span class="sh reveal">What guides us</span>
+        <h2 class="reveal">Show up as you are</h2>
+    </div>
+    <div class="values-grid">
+        <div></div>
+        <div class="values-item reveal"><h3>People over content</h3><p>Ours exists for the people in the room, not the people watching from outside. No cameras pushed in faces, no manufactured moments. If something's worth photographing, someone will photograph it. That's different from designing the experience around the photo.</p></div>
+        <div class="values-item reveal reveal-d1"><h3>Two languages, one group</h3><p>English and German, freely mixed. München is an international city and Ours reflects that. If you can communicate, you belong here.</p></div>
+        <div></div>
+        <div class="values-item reveal"><h3>Intentional, not exclusive</h3><p>Ours is open to anyone who shows up with good energy. There's no membership, no vetting. But there is an expectation: be present, be respectful, bring something to the table even if that something is just curiosity.</p></div>
+        <div class="values-item reveal reveal-d1"><h3>Built in the open</h3><p>Ours is a work in progress and that's the point. The format will evolve, the programming will shift, new ideas will come from the community itself. The only thing that stays fixed is the commitment to doing things with care.</p></div>
     </div>
 </section>
 
 <section class="contact">
     <div class="contact-grid">
-        <span class="sh reveal">Contribute</span>
+        <span class="sh reveal">Get in touch</span>
         <div class="contact-content">
-            <h2 class="reveal">Write something</h2>
-            <p class="reveal">Stories come from the community. If you rode something worth writing about or have something on your mind after an event, get in touch.</p>
+            <h2 class="reveal">Say hello</h2>
+            <p class="reveal">Whether you want to join a ride, come to a Salon, write a story, or just ask a question — reach out. We're always happy to hear from new people.</p>
             <a href="mailto:oursmunich@gmail.com" class="contact-email reveal">oursmunich@gmail.com</a>
         </div>
     </div>
